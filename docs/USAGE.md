@@ -1,47 +1,39 @@
 ## Usage
 
-The first script getPrimeInfraDevices.py, performs device list extraction from Prime Infrastructure server(s) and imports them into the MySQL database, 'inventory' table.
-The second script getDNACDevices.py, performs device list extraction from DNA Center server(s) and imports them into the MySQL database, 'inventory' table.
-The third script getACIAPICDevices.py, performs device list extraction from ACI APIC controller(s) and imports them into the MySQL database, 'inventory' table.
-The forth script PingandUpdateInventory.py, extracts the device list from the MySQL database and submits the list of devices to fping.  It also collects the results and updates the database.
-The fifth script CreateAvailabilityDashboard.py, creates the dashboard from the MySQL database results.
+The pptx2dashboard.py is the main and only Python script for this project.
+Make sure the (installation instructions)[INSTALLATION.md] are reviewed 
+and the (env.yaml)[./src/env.yaml] file is modified, if necessary.
 
+Start by developing a Powerpoint file to suit your dashboard/visualization 
+requirements.  Use text placeholders with unique variable names where 
+dynamic data should be placed. E.g. Total: ##VAR-TOTAL
+See (Powerpoint-Example)[example.pptx] for an example.
+Note: Ensure the variable placeholders are truly unique and aren't a subset 
+string of any other, as string replacements are being done.
+Good choices: ##VAR-TOTAL, ##VAR-FLOOR1
+Bad choices: ##FLOOR, ##FLOOR1TOTAL [FLOOR is inside FLOOR1TOTAL]
+Save the .pptx file to the project directory.
 
-Run the following Python scripts at least once manually or schedule in a crontab, as needed, based on your rate of network device change.  These scripts extract the network inventory and put them into the MySQL database.
+Use other scripts or orchestration methods to extract the instrumentation/
+telemetry desired (via SNMP, REST APIs, automated CLI capture, etc). Define 
+a mapping of the placeholder variable to the dynamic value as key, value 
+entries in a JSON file.
+See (variables.json)[./src/variables.json] for an example.
 
-    $ python getPrimeInfraDevices.py
-    $ python getDNACDevices.py
-    $ python getACIAPICDevices.py
+Save the JSON file to the project directory.
 
-Run the following Python scripts in a crontab, based on how often you'd like to update the dashboard - every 5 minutes, every minute, etc.
+Execute the conversion as such:
+    $ python pptx2dashboard.py --webName MyDashboard template-dashboard.pptx variables.json
 
-    $ python PingandUpdateInventory.py && python CreateAvailabilityDashboard.py
+A dashboard will be created and hosted on the local Apache webserver as 
+http://<IP>/MyDashboard.html
 
+Run the Python script in a periodic scheudule with a crontab, as needed, 
+based on your desire to update the dashboard.
 A standard crontab model could be:
 
     $ crontab -e
     #minute hour day_of_month month day_of_week command_to_run
-    #Example of running every two minutes, every day
-    */2 * * * * python PingandUpdateInventory.py  && python CreateAvailabilityDashboard.py
-
-
-If you are extracting devices from your management tools/controllers that you can't or don't want to ping for availability, use the mysql shell to update the 'inventory' table.  Specifically, set the do_ping column value to 0 (zero) and it will not be pinged.
-
-<kbd>
-
-    $ mysql
-
-    mysql> use devnet_dashboards;
-
-    Reading table information for completion of table and column names
-    You can turn off this feature to get a quicker startup with -A
-
-    Database changed
-    mysql> update inventory
-      -> SET do_ping = 0
-      -> WHERE mgmt_ip_address = '30.1.1.1';
-    Query OK, 1 row affected (0.00 sec)
-    Rows matched: 1  Changed: 1  Warnings: 0
-
-    mysql>  
-</kbd>
+    #Example of running every five minutes, every day
+    */5 * * * * python pptx2dashboard.py --webName MyDashboard template-dashboard.pptx variables.json
+    

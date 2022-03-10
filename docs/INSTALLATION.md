@@ -1,8 +1,13 @@
 ### Installation Requirements
-Python3 (3.9?  What is minimum Python package?  Docker consideration)
 
+- Python3.7 or higher (Development was done on 3.9.1
+- default-jre
 - libreoffice-impress
-- sudo apt install default-jre
 - libreoffice-java-common
-- https://ubuntu.com/server/docs/web-servers-apache
 - git
+- apache2
+
+The following (link)[https://ubuntu.com/server/docs/web-servers-apache] is helpful for initial installation and configuration 
+of Apache2.
+
+

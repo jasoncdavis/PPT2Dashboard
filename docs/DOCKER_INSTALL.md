@@ -1,5 +1,2 @@
 ### Docker Installations:
-Ensure you have docker and docker-compose installed in your environment.  In the project's [docker](./docker/) directory is the [docker-compose.yaml](./docker/docker-compose.yaml) file which defines the environment's service requirements.  Essentially, Apache, Python and MySQL images are created.  Remember your first time running 'docker-compose up' will require some time to download images from standard repositories.
-For the docker image we will create two container volumes, web-data and mysql-data, which maintain the dynamic content for the Apache server and the MySQL database.  They will persist data if 'docker-compose stop' or 'docker-compose down' is executed.  Ensure you monitor the host system's file storage.  Development was done with about 20G disk space and easily manages thousands of endpoint monitors.  
-
-Access the Python container from the host server running docker, with 'docker exec -it dd-cam_python_1 bash'.  The project files are in /project/code.
+TO BE COMPLETED
