@@ -7,7 +7,9 @@ and the [env.yaml](../src/env.yaml) file is modified, if necessary.
 Start by developing a Powerpoint file to suit your dashboard/visualization 
 requirements.  Use text placeholders with unique variable names where 
 dynamic data should be placed. E.g. Total: ##VAR-TOTAL
+
 See [Powerpoint-Example](example.pptx) for an example.
+
 Note: Ensure the variable placeholders are truly unique and aren't a subset 
 string of any other, as string replacements are being done.
 - Good choices: ##VAR-TOTAL, ##VAR-FLOOR1
@@ -28,7 +30,7 @@ Execute the conversion as such:
     $ python pptx2dashboard.py --webName MyDashboard template-dashboard.pptx variables.json
 
 A dashboard will be created and hosted on the local Apache webserver as 
-http://<IP>/MyDashboard.html
+http://\<IP\>/MyDashboard.html
 
 Run the Python script in a periodic scheudule with a crontab, as needed, 
 based on your desire to update the dashboard.
