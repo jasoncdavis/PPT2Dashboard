@@ -32,7 +32,7 @@ Powerpoint SME to design the optimal layout.
 ## Technology Stack /  Architecture overview
 Below is the overall architecture for the project.
 
-<kbd><img src="images/PPTX2DashboardArchitecture.png" alt="PPTX2Dashboard Architecture" width="1024" height="564"/></kbd>
+<kbd><img src="images/PPTX2DashboardArchitecture.png" alt="PPTX2Dashboard Architecture" width="1024" height="300"/></kbd>
 
 Other things you might include: N.A.
 

@@ -7,7 +7,5 @@
 - git
 - apache2
 
-The following (link)[https://ubuntu.com/server/docs/web-servers-apache] is helpful for initial installation and configuration 
+The following [link](https://ubuntu.com/server/docs/web-servers-apache) is helpful for initial installation and configuration 
 of Apache2.
-
-

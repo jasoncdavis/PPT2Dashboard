@@ -6,5 +6,5 @@ An 'env.yaml' file defines parameters and values for:
 - the image publishing directory
 - the client browser refresh interval
 
-Edit the [src/env.yaml](./src/env.yaml) file to suit your environment's 
+Edit the [src/env.yaml](../src/env.yaml) file to suit your environment's 
 configuration.
